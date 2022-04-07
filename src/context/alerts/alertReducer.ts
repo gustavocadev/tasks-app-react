@@ -1,39 +1,38 @@
-import { HIDE_ALERT, SHOW_ALERT } from "../../types";
+import { HIDE_ALERT, SHOW_ALERT } from "../../types"
+import { AlertState } from "./AlertProvider"
 
-type State = {
-    alert: {
-        msg: string;
-        category: string;
-    };
-}
-
-type Action = {
-    type: string;
-    payload: any;
-}
-
-
-const alertReducer = (state: State, action: Action) => {
-    switch (action.type) {
-        case SHOW_ALERT:
-            return {
-                ...state,
-                alert: action.payload
-            }
-        case HIDE_ALERT:
-            return {
-                ...state,
-                alert: {
-                    msg: '',
-                    category: ''
-                }
-            }
-
-        default:
-            return state;
+type Action =
+  | {
+      type: "SHOW_ALERT"
+      payload: {
+        msg: string
+        category: string
+      }
     }
+  | {
+      type: "HIDE_ALERT"
+      payload: {
+        msg: string
+        category: string
+      }
+    }
+
+const alertReducer = (state: AlertState, action: Action) => {
+  switch (action.type) {
+    case SHOW_ALERT:
+      return {
+        ...state,
+        alert: action.payload,
+      }
+    case HIDE_ALERT:
+      return {
+        ...state,
+        alert: action.payload,
+      }
+
+    default:
+      return state
+  }
 }
 
-export {
-    alertReducer
-}
+export { alertReducer }
